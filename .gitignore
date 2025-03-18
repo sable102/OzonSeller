@@ -1,5 +1,20 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿*.suo
+*.user
+.vs
+[Dd]ebug/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+*.pdb
+*.log
+*.dbmdl
+*.jfm
+/UpgradeLog.htm
+~*.xlsx
+*.map
 
-/OzonSeller.Core/appsettings.Development.json
+*.Global*.json
+/.editorconfig
+/Settings.DotSettings
+/.idea

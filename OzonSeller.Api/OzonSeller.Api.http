@@ -1,0 +1,6 @@
+@OzonSeller.Api_HostAddress = http://localhost:5210
+
+GET {{OzonSeller.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
