@@ -1,7 +1,9 @@
-﻿namespace OzonSeller.Core.ApiClient
+﻿
+namespace OzonSeller.Core.ApiClient
 {
-	internal interface IOzonApiClient
+	public interface IOzonApiClient
 	{
+		Task<T> PostAsync<T>(string endpoint, object requestData);
 		Task Test();
 	}
 }
