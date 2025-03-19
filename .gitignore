@@ -18,3 +18,4 @@ build/
 /.editorconfig
 /Settings.DotSettings
 /.idea
+/OzonSeller.Core/appsettings.Development.json
