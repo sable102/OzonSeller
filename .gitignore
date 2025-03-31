@@ -20,3 +20,4 @@ build/
 /.idea
 /OzonSeller.Core/appsettings.Development.json
 /OzonSeller.Store/Migrations
+/OzonSeller.Store.Site/.vscode
