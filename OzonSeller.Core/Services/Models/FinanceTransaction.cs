@@ -91,10 +91,37 @@ namespace OzonSeller.Core.Services.Models
 		public Posting Posting { get; set; }
 
 		[JsonPropertyName("items")]
-		public List<object> Items { get; set; }
+		public List<Item> Items { get; set; }
 
 		[JsonPropertyName("services")]
-		public List<object> Services { get; set; }
+		public List<Service> Services { get; set; }
+		
+		[JsonIgnore]
+		public double ServiceAmount { get; set; }
+		[JsonIgnore]
+		public string Skus { get; set; }
+		[JsonIgnore]
+		public string Names { get; set; }
+		[JsonIgnore]
+		public string PostingNumber { get; set; }
+	}
+
+	public class Item
+	{
+		[JsonPropertyName("name")]
+		public string Name { get; set; }
+
+		[JsonPropertyName("sku")]
+		public double Sku { get; set; }
+	}
+
+	public class Service
+	{
+		[JsonPropertyName("name")]
+		public string Name { get; set; }
+
+		[JsonPropertyName("price")]
+		public double Price { get; set; }
 	}
 
 	public class Result
@@ -114,5 +141,7 @@ namespace OzonSeller.Core.Services.Models
 		[JsonPropertyName("result")]
 		public Result Result { get; set; }
 	}
+
+
 
 }

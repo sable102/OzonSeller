@@ -1,0 +1,6 @@
+@OzonSeller.Store_HostAddress = http://localhost:5223
+
+GET {{OzonSeller.Store_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
