@@ -19,3 +19,4 @@ build/
 /Settings.DotSettings
 /.idea
 /OzonSeller.Core/appsettings.Development.json
+/OzonSeller.Store/Migrations
