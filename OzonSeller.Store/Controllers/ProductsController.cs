@@ -39,10 +39,19 @@ namespace OzonSeller.Store.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> AddProduct([FromBody] ProductDto productDto)
+		public async Task<ActionResult> AddProduct([FromForm] ProductDto productDto, IFormFile imageFile)
 		{
-			await _productService.AddProductAsync(productDto.Name, productDto.Description, productDto.Quantity);
-			return CreatedAtAction(nameof(GetProductById), new { id = productDto.ProductId }, productDto);
+			if (imageFile != null && imageFile.Length > 0)
+			{
+				var imagePath = Path.Combine("Images", $"{Guid.NewGuid()}_{imageFile.FileName}");
+				using (var stream = new FileStream(imagePath, FileMode.Create))
+				{
+					await imageFile.CopyToAsync(stream);
+				}
+				await _productService.AddProductAsync(productDto.Name, productDto.Description, productDto.Quantity, imagePath);
+				return CreatedAtAction(nameof(GetProductById), new { id = productDto.ProductId }, productDto);
+			}
+			return BadRequest("Image file is required.");
 		}
 
 		[HttpPost("{id}/transactions")]
@@ -65,6 +74,25 @@ namespace OzonSeller.Store.Controllers
 			var articles = await _productArticleService.GetProductArticlesByProductIdAsync(id);
 			return Ok(articles);
 		}
+
+		[HttpGet("{id}/image")]
+		public async Task<ActionResult> GetProductImage(int id)
+		{
+			var product = await _productRepository.GetByIdAsync(id);
+			if (product == null || string.IsNullOrEmpty(product.ImagePath))
+			{
+				return NotFound();
+			}
+
+			var imagePath = Path.Combine(Directory.GetCurrentDirectory(), product.ImagePath);
+			if (!System.IO.File.Exists(imagePath))
+			{
+				return NotFound();
+			}
+
+			var imageBytes = await System.IO.File.ReadAllBytesAsync(imagePath);
+			return File(imageBytes, "image/jpeg");
+		}
 	}
 
 	public class ProductDto
@@ -73,6 +101,7 @@ namespace OzonSeller.Store.Controllers
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public int Quantity { get; set; }
+		public string ImagePath { get; set; }
 	}
 
 	public class TransactionDto

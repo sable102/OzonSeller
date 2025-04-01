@@ -18,6 +18,15 @@ builder.Services.AddScoped<ProductArticleService>();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowLocalhost",
+		builder => builder
+			.WithOrigins("http://localhost:4173", "http://localhost:5173")
+			.AllowAnyMethod()
+			.AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +38,8 @@ var app = builder.Build();
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 

@@ -14,9 +14,9 @@ namespace OzonSeller.Store.Application
 			_transactionRepository = transactionRepository;
 		}
 
-		public async Task AddProductAsync(string name, string description, int quantity)
+		public async Task AddProductAsync(string name, string description, int quantity, string imagePath)
 		{
-			var product = new Product(name, description, quantity);
+			var product = new Product(name, description, quantity, imagePath);
 			await _productRepository.AddAsync(product);
 		}
 

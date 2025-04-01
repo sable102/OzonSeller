@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from '../../http-common';
 
 interface Product {
   productId: number;
@@ -26,11 +26,11 @@ const mutations = {
 
 const actions = {
   async fetchProducts({ commit }: any) {
-    const response = await axios.get('/api/products');
+    const response = await apiClient.get('/products');
     commit('SET_PRODUCTS', response.data);
   },
   async addProduct({ commit }: any, product: Product) {
-    const response = await axios.post('/api/products', product);
+    const response = await apiClient.post('/products', product);
     commit('ADD_PRODUCT', response.data);
   }
 };
@@ -40,6 +40,7 @@ const getters = {
 };
 
 export default {
+  namespaced: true,
   state,
   mutations,
   actions,

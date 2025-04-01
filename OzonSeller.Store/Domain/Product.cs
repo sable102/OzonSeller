@@ -3,20 +3,23 @@ using System.Collections.Generic;
 
 namespace OzonSeller.Store.Domain
 {
+
 	public class Product
 	{
 		public int ProductId { get; private set; }
 		public string Name { get; private set; }
 		public string Description { get; private set; }
 		public int Quantity { get; private set; }
+		public string ImagePath { get; private set; }
 		public List<Transaction> Transactions { get; private set; }
 
-		public Product(string name, string description, int quantity)
+		public Product(string name, string description, int quantity, string imagePath)
 		{
 			Name = name;
 			Description = description;
 			Quantity = quantity;
-			Transactions = [];
+			ImagePath = imagePath;
+			Transactions = new List<Transaction>();
 		}
 
 		public void AddTransaction(Transaction transaction)
@@ -32,6 +35,8 @@ namespace OzonSeller.Store.Domain
 			}
 		}
 	}
+
+
 
 	public class Transaction
 	{

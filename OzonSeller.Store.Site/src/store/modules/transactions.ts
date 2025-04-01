@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from '../../http-common';
 
 interface Transaction {
   transactionId: number;
@@ -27,11 +27,11 @@ const mutations = {
 
 const actions = {
   async fetchTransactions({ commit }: any) {
-    const response = await axios.get('/api/transactions');
+    const response = await apiClient.get('/transactions');
     commit('SET_TRANSACTIONS', response.data);
   },
   async addTransaction({ commit }: any, transaction: Transaction) {
-    const response = await axios.post('/api/transactions', transaction);
+    const response = await apiClient.post('/transactions', transaction);
     commit('ADD_TRANSACTION', response.data);
   }
 };

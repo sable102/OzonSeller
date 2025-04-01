@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Products</h1>
-    <ProductList />
     <ProductForm />
+    <ProductList />
   </div>
 </template>
 
@@ -14,8 +14,8 @@ import ProductForm from '../components/ProductForm.vue';
 export default defineComponent({
   name: 'ProductView',
   components: {
-    ProductList,
-    ProductForm
+    ProductForm,
+    ProductList
   }
 });
 </script>
